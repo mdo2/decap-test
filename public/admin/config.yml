@@ -10,23 +10,14 @@ public_folder: content-media
 collections:
   - name: "pages"
     label: "Pages"
+    folder: "content/pages"
     create: true
-    files:
-    - label: "Home"
-      name: "home"
-      file: "content/home.md"
-      fields:
-        - { label: "Title", name: "title", widget: "string"}
-        - { label: "Publish Date", name: "date", widget: "datetime" }
-        - { label: "Body", name: "body", widget: "markdown"}
-        - { label: "Image", name: "hero-image", widget: "image", required: false }
-        - { label: "File", name: "hero-file", widget: "file", required: false }
-        - label: 'Cats'
-          name: "cats"
-          widget: list
-          fields:
-            - { label: "Name", name: "name", widget: "string"}
-            - { label: "Description", name: "description", widget: "text"}
+    fields:
+      - { label: "Title", name: "title", widget: "string"}
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Body", name: "body", widget: "markdown"}
+      - { label: "Image", name: "hero-image", widget: "image", required: false }
+      - { label: "File", name: "hero-file", widget: "file", required: false }
   - name: 'blog' # Used in routes, e.g., /admin/collections/blog
     label: 'Code Blog' # Used in the UI
     folder: 'content/blog' # The path to the folder where the documents are stored
