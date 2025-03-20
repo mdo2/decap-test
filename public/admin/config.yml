@@ -1,12 +1,25 @@
 backend:
   name: git-gateway
   branch: main
+  commit_messages:
+    create: "feat(content): create {{collection}} entry “{{slug}}”"
+    update: "feat(content): update {{collection}} entry “{{slug}}”"
+    delete: "feat(content): delete {{collection}} entry “{{slug}}”"
+    uploadMedia: "feat(content): upload media file “{{path}}”"
+    deleteMedia: "feat(content): delete media file “{{path}}”"
 
 local_backend: true
 publish_mode: editorial_workflow
 
 media_folder: public/content-media
 public_folder: content-media
+
+site_url: /
+# display_url: / # defautls to site_url
+
+logo_url: /next.svg
+# locale: en
+
 collections:
   - name: "pages"
     label: "Pages"
