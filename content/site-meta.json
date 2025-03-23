@@ -8,19 +8,14 @@
       "coding"
     ],
     "referrer": "strict-origin-when-cross-origin",
-    "description": "asdasd",
-    "extraMeta": [
-      {
-        "name": "extra-meta",
-        "content": "My extra meta"
-      }
-    ]
+    "description": "",
+    "extraMeta": []
   },
   "opengraph": {
     "type": "website",
     "siteName": "Arribasjavier",
     "image": "/media/img/next.svg",
-    "title": "Title for opengraph",
+    "title": "",
     "description": ""
   }
 }
