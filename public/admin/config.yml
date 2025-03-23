@@ -17,13 +17,60 @@ public_folder: content-media
 site_url: /
 # display_url: / # defautls to site_url
 
-logo_url: /next.svg
+logo_url: /media/img/next.svg
 # locale: en
 
+alias:
+  basic_meta_fields: &basic_meta_fields
+    label: Basic meta
+    name: basicMeta
+    widget: object
+    collapsed: true
+    hint: See documentation [here](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta/name)
+    required: false
+    fields:
+      - label: Title
+        name: title
+        widget: string
+        hint: "Text to appear on browser page's tab. [More info](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/title)"
+        required: false
+      - { label: Description, name: description, widget: string, hint: Short summary of page meaning, required: false }
+      - { label: Keywords, name: keywords, widget: list, hint: Words related to your page content and target, required: false }
+      - label: Referrer
+        name: referrer
+        widget: select
+        options: [no-referrer,origin,no-referrer-when-downgrade,origin-when-cross-origin,same-origin,strict-origin,strict-origin-when-cross-origin]
+        hint: "[Referrer Policiy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Referrer-Policy)"
+        required: false
+      - label: Extra meta tags
+        name: extraMeta
+        widget: list
+        hint: Additional html meta tags to be included in <head> section of the page
+        required: false
+        fields:
+          - { label: Name, name: name, widget: string }
+          - { label: Content, name: content, widget: string }
+  opengraph_fields: &opengraph_fields
+    label: OpenGraph meta
+    name: opengraph
+    widget: object
+    collapsed: true
+    required: false
+    hint: See documentation [here](https://ogp.me/)
+    fields:
+      - { label: Title, name: title, widget: string, hint: Defaults to page meta title, required: false }
+      - { label: Description, name: description, widget: text, hint: Defaults to page meta description, required: false }
+      - { label: Type, name: type, widget: select, options: [website,article,profile,book], default: website, required: true }
+      - { label: Cannonical URL, name: url, widget: string, hint: Defaults to page's URL, required: false }
+      - { label: Site name, name: siteName, widget: string, hint: The name of the entire website, required: false }
+      - { label: Image, name: image, widget: image, required: false }
+      - { label: Audio, name: audio, widget: file, required: false }
+      - { label: Video, name: video, widget: file, required: false }
+
 collections:
-  - name: "pages"
-    label: "Pages"
-    folder: "content/pages"
+  - name: pages
+    label: Pages
+    folder: content/pages
     create: true
     fields:
       - { label: "Title", name: "title", widget: "string"}
@@ -31,32 +78,16 @@ collections:
       - { label: "Body", name: "body", widget: "markdown"}
       - { label: "Image", name: "hero-image", widget: "image", required: false }
       - { label: "File", name: "hero-file", widget: "file", required: false }
-  - name: 'blog' # Used in routes, e.g., /admin/collections/blog
-    label: 'Code Blog' # Used in the UI
-    folder: 'content/blog' # The path to the folder where the documents are stored
-    create: true # Allow users to create new documents in this collection
-    slug: '{{year}}-{{month}}-{{day}}-{{title}}' # Filename template, e.g., 2024-090-25-name-of-doc.md
-    view_groups:
-      - label: Year
-        field: date
-        pattern: \d{4}
-    fields: # The fields for each document, usually in front matter
-      - {
-          label: 'Template Key', # This field is used to "group" the posts by category
-          name: 'templateKey',
-          widget: 'hidden', # It should be an `hidden` field
-          default: 'blog',
-        }
-      - { label: 'Title', name: 'title', widget: string }
-      - { label: 'Featured', name: 'featured', widget: boolean, default: false }
-      - {
-          label: 'Body',
-          name: 'body',
-          widget: 'markdown',
-          sanitize_preview: true,
-          # buttons: ['bold', 'italic', 'link'],
-          # modes: ['rich_text'],
-          # editor_components: [''],
-        }
-      - { label: 'Tags', name: 'tags', widget: 'list' }
-      - { label: 'Publish Date', name: 'date', widget: 'datetime' }
+
+  - label: Site config
+    name: root
+    files:
+      - label: Site Meta
+        name: siteMeta
+        file: content/site-meta.json
+        fields:
+          - <<: *basic_meta_fields
+            collapsed: false
+            required: true
+          - <<: *opengraph_fields
+            required: true

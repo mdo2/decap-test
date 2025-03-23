@@ -1,0 +1,26 @@
+{
+  "basicMeta": {
+    "title": "Arribasjavier | Software engineering",
+    "keywords": [
+      "software",
+      "programming",
+      "code",
+      "coding"
+    ],
+    "referrer": "strict-origin-when-cross-origin",
+    "description": "asdasd",
+    "extraMeta": [
+      {
+        "name": "extra-meta",
+        "content": "My extra meta"
+      }
+    ]
+  },
+  "opengraph": {
+    "type": "website",
+    "siteName": "Arribasjavier",
+    "image": "/media/img/next.svg",
+    "title": "Title for opengraph",
+    "description": ""
+  }
+}

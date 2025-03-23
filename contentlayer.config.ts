@@ -1,5 +1,7 @@
 import { defineDocumentType, makeSource } from 'contentlayer2/source-files'
 
+import { SiteMeta } from '@/contentlayer/SiteMeta'
+
 const Page = defineDocumentType(() => ({
   name: 'Page',
   filePathPattern: `pages/*.md`,
@@ -11,49 +13,9 @@ const Page = defineDocumentType(() => ({
     },
     description: {
       type: 'string',
-      required: false,
     },
     date: {
       type: 'date',
-      required: false,
-    },
-  },
-  computedFields: {
-    slug: {
-      type: 'string',
-      resolve: (doc) => doc._raw.sourceFileName.replace(/\.md/, ''),
-    },
-  },
-}))
-
-const Blog = defineDocumentType(() => ({
-  name: 'Blog',
-  filePathPattern: `blog/*.md`,
-  contentType: 'markdown',
-  fields: {
-    title: {
-      type: 'string',
-      required: true,
-    },
-    date: {
-      type: 'date',
-      required: false,
-    },
-    description: {
-      type: 'string',
-      required: false,
-    },
-    tags: {
-      type: 'json',
-      required: false,
-    },
-    templateKey: {
-      type: 'string',
-      required: true,
-    },
-    featured: {
-      type: 'boolean',
-      required: false,
     },
   },
   computedFields: {
@@ -66,6 +28,9 @@ const Blog = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: 'content',
-  documentTypes: [Page, Blog],
-  disableImportAliasWarning: true,
+  documentTypes: [Page, SiteMeta],
+  fieldOptions: {
+    typeFieldName: '_type',
+  },
+  // disableImportAliasWarning: true,
 })
